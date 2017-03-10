@@ -1,0 +1,62 @@
+package com.soda.filters;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+  * @ClassName: SessionFilter
+  * @Description: 鍒ゆ柇鏄惁鐧诲綍
+  * @author lisy
+  * @date 2015骞�鏈�鏃�涓嬪崍12:00:37
+ */
+@SuppressWarnings("unused")
+public class SessionFilter implements Filter {
+	private static final Log logger = LogFactory.getLog(SessionFilter.class);
+
+	private List<String> list = new ArrayList<String>();
+	
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// 初始化需要拦截的文件夹
+//		String include = filterConfig.getInitParameter("include");
+//		if (!StringUtils.isBlank(include)) {
+//			StringTokenizer st = new StringTokenizer(include, ",");
+//			list.clear();
+//			while (st.hasMoreTokens()) {
+//				list.add(st.nextToken());
+//			}
+//		}
+
+	}
+
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+
+		String servletPath = request.getServletPath();
+		String path = request.getRequestURI();
+
+		if (null == request.getSession().getAttribute("sessionInfo")) {// session不存在需要拦截
+			logger.info("您还没有登录或登录已超时，请重新登录!");
+			request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录，然后再刷新本功能！");
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		} else {
+			chain.doFilter(request, response);
+		}
+	}
+
+	public void destroy() {
+	}
+}

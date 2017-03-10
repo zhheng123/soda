@@ -1,0 +1,36 @@
+package com.soda.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.soda.bean.News;
+import com.soda.services.iface.NewsService;
+
+@Controller
+@RequestMapping("/test")
+public class UserController {
+	
+	@Resource
+	NewsService newService;
+	
+	@RequestMapping("/toIndex")
+	public ModelAndView toIndex(Integer newId){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("index");
+		return mav;
+	}
+	
+	@RequestMapping("/newToJson")
+	public ModelAndView toJson(Integer newId){
+		ModelAndView mav=new ModelAndView();
+		News news=newService.findNewById(newId);
+		Gson  gson=new Gson();
+		String newDetail=gson.toJson(gson);
+		mav.setViewName("index");
+		return mav;
+	}
+}

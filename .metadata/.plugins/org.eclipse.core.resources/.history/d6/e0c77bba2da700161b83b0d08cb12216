@@ -1,0 +1,6 @@
+package com.soda.controller;
+@Controller
+@RequestMapping
+public class UserController {
+
+}

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.soda.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.soda.bean.News" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="coverurl" property="coverurl" jdbcType="VARCHAR" />
+    <result column="ispublish" property="ispublish" jdbcType="VARCHAR" />
+    <result column="publishdate" property="publishdate" jdbcType="TIMESTAMP" />
+    <result column="savetime" property="savetime" jdbcType="TIMESTAMP" />
+    <result column="praisenum" property="praisenum" jdbcType="INTEGER" />
+    <result column="stepnum" property="stepnum" jdbcType="INTEGER" />
+    <result column="sharenum" property="sharenum" jdbcType="INTEGER" />
+    <result column="istop" property="istop" jdbcType="VARCHAR" />
+    <result column="remarktime1" property="remarktime1" jdbcType="TIMESTAMP" />
+    <result column="remark1" property="remark1" jdbcType="INTEGER" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remarktime2" property="remarktime2" jdbcType="TIMESTAMP" />
+    <result column="linkid" property="linkid" jdbcType="INTEGER" />
+    <result column="readNum" property="readnum" jdbcType="INTEGER" />
+    <result column="weiboid" property="weiboid" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="INTEGER" />
+    <result column="wbcommentnum" property="wbcommentnum" jdbcType="INTEGER" />
+    <result column="timetask" property="timetask" jdbcType="VARCHAR" />
+    <result column="organ" property="organ" jdbcType="VARCHAR" />
+    <result column="titleurl" property="titleurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.soda.bean.News" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, author, coverurl, ispublish, publishdate, savetime, praisenum, stepnum, 
+    sharenum, istop, remarktime1, remark1, remark2, remarktime2, linkid, readNum, weiboid, 
+    source, wbcommentnum, timetask, organ, titleurl
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.soda.bean.News" >
+    insert into news (id, title, author, 
+      coverurl, ispublish, publishdate, 
+      savetime, praisenum, stepnum, 
+      sharenum, istop, remarktime1, 
+      remark1, remark2, remarktime2, 
+      linkid, readNum, weiboid, 
+      source, wbcommentnum, timetask, 
+      organ, titleurl, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{coverurl,jdbcType=VARCHAR}, #{ispublish,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}, 
+      #{savetime,jdbcType=TIMESTAMP}, #{praisenum,jdbcType=INTEGER}, #{stepnum,jdbcType=INTEGER}, 
+      #{sharenum,jdbcType=INTEGER}, #{istop,jdbcType=VARCHAR}, #{remarktime1,jdbcType=TIMESTAMP}, 
+      #{remark1,jdbcType=INTEGER}, #{remark2,jdbcType=VARCHAR}, #{remarktime2,jdbcType=TIMESTAMP}, 
+      #{linkid,jdbcType=INTEGER}, #{readnum,jdbcType=INTEGER}, #{weiboid,jdbcType=VARCHAR}, 
+      #{source,jdbcType=INTEGER}, #{wbcommentnum,jdbcType=INTEGER}, #{timetask,jdbcType=VARCHAR}, 
+      #{organ,jdbcType=VARCHAR}, #{titleurl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.soda.bean.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="coverurl != null" >
+        coverurl,
+      </if>
+      <if test="ispublish != null" >
+        ispublish,
+      </if>
+      <if test="publishdate != null" >
+        publishdate,
+      </if>
+      <if test="savetime != null" >
+        savetime,
+      </if>
+      <if test="praisenum != null" >
+        praisenum,
+      </if>
+      <if test="stepnum != null" >
+        stepnum,
+      </if>
+      <if test="sharenum != null" >
+        sharenum,
+      </if>
+      <if test="istop != null" >
+        istop,
+      </if>
+      <if test="remarktime1 != null" >
+        remarktime1,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remarktime2 != null" >
+        remarktime2,
+      </if>
+      <if test="linkid != null" >
+        linkid,
+      </if>
+      <if test="readnum != null" >
+        readNum,
+      </if>
+      <if test="weiboid != null" >
+        weiboid,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="wbcommentnum != null" >
+        wbcommentnum,
+      </if>
+      <if test="timetask != null" >
+        timetask,
+      </if>
+      <if test="organ != null" >
+        organ,
+      </if>
+      <if test="titleurl != null" >
+        titleurl,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="coverurl != null" >
+        #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ispublish != null" >
+        #{ispublish,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="savetime != null" >
+        #{savetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praisenum != null" >
+        #{praisenum,jdbcType=INTEGER},
+      </if>
+      <if test="stepnum != null" >
+        #{stepnum,jdbcType=INTEGER},
+      </if>
+      <if test="sharenum != null" >
+        #{sharenum,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null" >
+        #{istop,jdbcType=VARCHAR},
+      </if>
+      <if test="remarktime1 != null" >
+        #{remarktime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=INTEGER},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarktime2 != null" >
+        #{remarktime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkid != null" >
+        #{linkid,jdbcType=INTEGER},
+      </if>
+      <if test="readnum != null" >
+        #{readnum,jdbcType=INTEGER},
+      </if>
+      <if test="weiboid != null" >
+        #{weiboid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="wbcommentnum != null" >
+        #{wbcommentnum,jdbcType=INTEGER},
+      </if>
+      <if test="timetask != null" >
+        #{timetask,jdbcType=VARCHAR},
+      </if>
+      <if test="organ != null" >
+        #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="titleurl != null" >
+        #{titleurl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soda.bean.News" >
+    update news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="coverurl != null" >
+        coverurl = #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ispublish != null" >
+        ispublish = #{ispublish,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        publishdate = #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="savetime != null" >
+        savetime = #{savetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praisenum != null" >
+        praisenum = #{praisenum,jdbcType=INTEGER},
+      </if>
+      <if test="stepnum != null" >
+        stepnum = #{stepnum,jdbcType=INTEGER},
+      </if>
+      <if test="sharenum != null" >
+        sharenum = #{sharenum,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null" >
+        istop = #{istop,jdbcType=VARCHAR},
+      </if>
+      <if test="remarktime1 != null" >
+        remarktime1 = #{remarktime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=INTEGER},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remarktime2 != null" >
+        remarktime2 = #{remarktime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkid != null" >
+        linkid = #{linkid,jdbcType=INTEGER},
+      </if>
+      <if test="readnum != null" >
+        readNum = #{readnum,jdbcType=INTEGER},
+      </if>
+      <if test="weiboid != null" >
+        weiboid = #{weiboid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="wbcommentnum != null" >
+        wbcommentnum = #{wbcommentnum,jdbcType=INTEGER},
+      </if>
+      <if test="timetask != null" >
+        timetask = #{timetask,jdbcType=VARCHAR},
+      </if>
+      <if test="organ != null" >
+        organ = #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="titleurl != null" >
+        titleurl = #{titleurl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.soda.bean.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      coverurl = #{coverurl,jdbcType=VARCHAR},
+      ispublish = #{ispublish,jdbcType=VARCHAR},
+      publishdate = #{publishdate,jdbcType=TIMESTAMP},
+      savetime = #{savetime,jdbcType=TIMESTAMP},
+      praisenum = #{praisenum,jdbcType=INTEGER},
+      stepnum = #{stepnum,jdbcType=INTEGER},
+      sharenum = #{sharenum,jdbcType=INTEGER},
+      istop = #{istop,jdbcType=VARCHAR},
+      remarktime1 = #{remarktime1,jdbcType=TIMESTAMP},
+      remark1 = #{remark1,jdbcType=INTEGER},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remarktime2 = #{remarktime2,jdbcType=TIMESTAMP},
+      linkid = #{linkid,jdbcType=INTEGER},
+      readNum = #{readnum,jdbcType=INTEGER},
+      weiboid = #{weiboid,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      wbcommentnum = #{wbcommentnum,jdbcType=INTEGER},
+      timetask = #{timetask,jdbcType=VARCHAR},
+      organ = #{organ,jdbcType=VARCHAR},
+      titleurl = #{titleurl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soda.bean.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      coverurl = #{coverurl,jdbcType=VARCHAR},
+      ispublish = #{ispublish,jdbcType=VARCHAR},
+      publishdate = #{publishdate,jdbcType=TIMESTAMP},
+      savetime = #{savetime,jdbcType=TIMESTAMP},
+      praisenum = #{praisenum,jdbcType=INTEGER},
+      stepnum = #{stepnum,jdbcType=INTEGER},
+      sharenum = #{sharenum,jdbcType=INTEGER},
+      istop = #{istop,jdbcType=VARCHAR},
+      remarktime1 = #{remarktime1,jdbcType=TIMESTAMP},
+      remark1 = #{remark1,jdbcType=INTEGER},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remarktime2 = #{remarktime2,jdbcType=TIMESTAMP},
+      linkid = #{linkid,jdbcType=INTEGER},
+      readNum = #{readnum,jdbcType=INTEGER},
+      weiboid = #{weiboid,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      wbcommentnum = #{wbcommentnum,jdbcType=INTEGER},
+      timetask = #{timetask,jdbcType=VARCHAR},
+      organ = #{organ,jdbcType=VARCHAR},
+      titleurl = #{titleurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

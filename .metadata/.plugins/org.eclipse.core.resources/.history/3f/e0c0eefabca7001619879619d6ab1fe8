@@ -1,0 +1,22 @@
+package com.soda.controller;
+
+import javax.annotation.Resource;
+
+
+
+import com.soda.services.iface.NewsService;
+
+@Controller
+@RequestMapping("/test")
+public class UserController {
+	
+	@Resource
+	NewsService newService;
+	
+	@RequestMapping("/toIndex")
+	public ModelAndView toIndex(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("index");
+		return mav;
+	}
+}

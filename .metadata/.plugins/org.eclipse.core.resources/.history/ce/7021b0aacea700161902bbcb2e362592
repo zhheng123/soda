@@ -1,0 +1,5 @@
+package com.soda.services.iface;
+
+public interface NewsService {
+	
+}

@@ -1,0 +1,5 @@
+package com.soda.controller;
+
+public class UserController {
+
+}
